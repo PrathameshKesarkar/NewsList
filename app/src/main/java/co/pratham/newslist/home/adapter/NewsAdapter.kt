@@ -35,13 +35,7 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun updateItem(collection: NewsCollection) {
-        var itemPos = 0
-        for (item in items) {
-            if ((item as Item).slug == collection.slug) {
-                itemPos = items.indexOf(item)
-                break
-            }
-        }
+        val itemPos = items.indexOfFirst { item -> (item as Item).slug == collection.slug }
         items.addAll(itemPos + 1, collection.items)
         notifyItemRangeInserted(itemPos + 1, collection.items.size)
     }
