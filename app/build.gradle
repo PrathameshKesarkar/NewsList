@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "co.pratham.newslist"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String","BASE_URL","\"https://demo9639618.mockable.io\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+buildscript {
+    apply from: '../dependencies.gradle'
+    // ...
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //UI
+    implementation "com.android.support:appcompat-v7:$appCompatVer"
+    implementation "com.android.support:recyclerview-v7:$appCompatVer"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVer"
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    //Testing
+    testImplementation "junit:junit:$junitVer"
+    androidTestImplementation "com.android.support.test:runner:$testRunnerVer"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$expressoVer"
+
+
+    //Dependency Injection
+    implementation "com.google.dagger:dagger-android-support:$daggerVer" // if you use the support libraries
+    kapt "com.google.dagger:dagger-android-processor:$daggerVer"
+    implementation "com.google.dagger:dagger:$daggerVer"
+    kapt "com.google.dagger:dagger-compiler:$daggerVer"
+
+    //ImageLoading
+    implementation "com.github.bumptech.glide:glide:$glideVer"
+    kapt "com.github.bumptech.glide:compiler:$glideVer"
+
+    //Network
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVer"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitAdapterVer"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVer"
+    implementation "com.squareup.okhttp3:logging-interceptor:$httpLoggingVer"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVer"
+
+    //Architecture
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
+    implementation "android.arch.persistence.room:rxjava2:$roomDbVer"
+    kapt "android.arch.persistence.room:compiler:$roomDbVer"
+
+}
